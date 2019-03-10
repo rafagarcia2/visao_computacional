@@ -39,7 +39,7 @@ def nonmaxsup(I,gradang):
                 Inms[r-1,c-1] = Ipad[r,c]
     return Inms
 
-img = cv2.imread('r2d2.jpg') # save b, g, r
+img = cv2.imread('millenium_falcon.JPG') # save b, g, r
 
 b,g,r = cv2.split(img)
 image = cv2.merge((r, g, b))
