@@ -2,17 +2,15 @@
 1.  Através de uma implementação, aumente o brilho de uma imagem e pinte faixas pretas
     verticais em uma imagem para obter o seguinte efeito:
 '''
-
-
 import cv2
-import math
 import numpy as np
 
 alpha = 1.5     # Simple contrast control
-beta = 10      # Simple brightness control
+beta = 70      # Simple brightness control
 
-#image = cv2.imread('millenium_falcon.JPG') # save b, g, r
-image = cv2.imread('luke_age.jpg')
+image_original = cv2.imread('nazare-confusa.jpg')
+
+image = cv2.cvtColor(image_original, cv2.COLOR_BGR2GRAY)
 
 new_image = np.zeros(image.shape, image.dtype)
 
@@ -24,12 +22,10 @@ for y in range(image.shape[0]):
             black = not black
             aux = 1
         aux += 1
-        for c in range(image.shape[2]):
-            if black:
-                new_image[y,x,c] = np.clip(0, 0, 255)
-            else:
-                new_image[y,x,c] = np.clip(alpha*image[y,x,c] - beta, 0, 255)
-
+        if black:
+            new_image[y,x] = np.clip(0, 0, 255)
+        else:
+            new_image[y,x] = np.clip(alpha*image[y,x] + beta, 0, 255)
 
 print(new_image.shape)
 cv2.imshow('R-RGB', new_image)
