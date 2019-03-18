@@ -1,5 +1,8 @@
-import Image, numpy, math
-I = Image.open('praia.jpg')
+import numpy, math
+from PIL import Image
+import cv2
+
+I = Image.open('a_r2d2.jpg')
 I = I.convert('L')
 a = numpy.asarray(I)
 A = numpy.fft.fft2(a)
@@ -21,4 +24,6 @@ A = numpy.fft.fftshift(A)
 
 output = Image.fromarray(numpy.fft.ifft2(A).astype(numpy.uint8))
 output.show()
+
+cv2.imwrite('p_baixa_ideal.jpg', output)
 

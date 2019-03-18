@@ -1,5 +1,7 @@
-import Image, numpy
-I = Image.open('praia.jpg')
+import numpy
+from PIL import Image
+
+I = Image.open('a_r2d2.jpg')
 I = I.convert('L')
 a = numpy.asarray(I)
 A = numpy.fft.fft2(a)
