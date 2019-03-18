@@ -1,10 +1,10 @@
 import numpy as np, math
 from PIL import Image
 
-I2 = Image.open('eleven.jpg')
+I2 = Image.open('eleven2.jpg')
 I2 = I2.convert('L')
 
-I = Image.open('dustin.jpg')
+I = Image.open('finn.png')
 I = I.convert('L')
 
 
