@@ -1,33 +1,57 @@
-import numpy
+import numpy as np, math
 from PIL import Image
 
-I = Image.open('a_r2d2.jpg')
+I2 = Image.open('eleven.jpg')
+I2 = I2.convert('L')
+
+I = Image.open('dustin.jpg')
 I = I.convert('L')
 
 
 def passaaltaideal(image):
-    a = numpy.asarray(image)
-    filtro = numpy.zeros(a.shape)
+    a = np.asarray(image)
+    A = np.fft.fft2(a)
+    A = np.fft.fftshift(A)
+
+    for u in range(image.size[0]):
+        for v in range(image.size[1]):
+            u1 = u - image.size[0]/2
+            v1 = v - image.size[1]/2
+            Duv = math.sqrt(u1*u1 + v1*v1)
+            if Duv > 100:
+                Huv = 1
+            else:
+                Huv = 0
+            A[v][u] = Huv*A[v][u]
+
     
-    a.flags.writeable = True
-    filtro.flags.writeable = True
+    Image.fromarray(abs(A)/800)
 
-    #filtro da media tamanho M por M
-    M = 20
-    for i in range(M):
-        for j in range(M):
-            filtro[i][j] = 1.0/(M*M)
+    return A
 
-    S = numpy.fft.fft2(filtro)
-    A = numpy.fft.fft2(a)
+def passabaixaideal(image):
+    a = np.asarray(image)
+    A = np.fft.fft2(a)
+    A = np.fft.fftshift(A)
 
-    res = numpy.multiply(S, A)
+    for u in range(image.size[0]):
+        for v in range(image.size[1]):
+            u1 = u - image.size[0]/2
+            v1 = v - image.size[1]/2
+            Duv = math.sqrt(u1*u1 + v1*v1)
+            if Duv < 20:
+                Huv = 1
+            else:
+                Huv = 0
+            A[v][u] = Huv*A[v][u]
 
-    new_image = Image.fromarray(numpy.fft.ifft2(res).astype(numpy.uint8))
+    Image.fromarray(abs(A)/800)
 
-    return new_image
+    return A
 
-r = passaaltaideal(I)
-r.show()
-#print(r)
-print(type(r))
+pbi = passabaixaideal(I)
+pai = passaaltaideal(I2)
+
+output = pbi + pai
+output = Image.fromarray(np.abs(np.fft.ifft2(output)).astype(np.uint8))
+output.show()
