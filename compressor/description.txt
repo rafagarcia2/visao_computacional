@@ -1,0 +1,12 @@
+Implemente um codificador/decodificador para compressão de imagens. Um programa codifica a imagem, 
+gerando como resultado um arquivo imagem comprimido. O programa que decodifica deve exibir a imagem na 
+tela e/ou gravar em um outro arquivo em uma extensão conhecida.
+
+A quantização (remoção de informações irrelevantes para compressão com perdas) é opcional, 
+mas recomendado :-)
+
+Os programas devem receber como um dos argumentos de linha de comando o caminho da imagem 
+a ser processada. Outros argumentos necessários devem ser descritos em um help.
+
+Escreva de forma sucinta em um documento quais foram os métodos utilizados para codificação de 
+símbolos e quantização (se aplicável) e as referências bibliográficas utilizada

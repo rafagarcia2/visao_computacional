@@ -1,7 +1,0 @@
-Implemente a detecção de retas em imagens
-
-O programa deve receber como um dos argumentos de linha de comando o caminho da imagem a ser processada. Outros argumentos necessários devem ser descritos em um help.
-
-Pode-se utilizar a função Canny para detecção de bordas.
-
-Bônus (1.0 pt): detecção de círculos em imagens.
