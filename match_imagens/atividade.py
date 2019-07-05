@@ -1,10 +1,10 @@
 import numpy as np, math
 from PIL import Image
 
-I2 = Image.open('eleven2.jpg')
+I2 = Image.open('finn.png')
 I2 = I2.convert('L')
 
-I = Image.open('finn.png')
+I = Image.open('eleven2.jpg')
 I = I.convert('L')
 
 
@@ -52,6 +52,8 @@ def passabaixaideal(image):
 pbi = passabaixaideal(I)
 pai = passaaltaideal(I2)
 
-output = pbi + pai
-output = Image.fromarray(np.abs(np.fft.ifft2(output)).astype(np.uint8))
-output.show()
+new_img = pbi + pai
+
+new_img = Image.fromarray(np.abs(np.fft.ifft2(new_img)).astype(np.uint8))
+new_img.show()
+new_img.save("result.jpg")
