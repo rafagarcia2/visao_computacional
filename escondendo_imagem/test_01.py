@@ -6,9 +6,9 @@ import cv2
 import numpy as np
 
 alpha = 1.5     # Simple contrast control
-beta = 70      # Simple brightness control
+beta = 160      # Simple brightness control
 
-image_original = cv2.imread('nazare-confusa.jpg')
+image_original = cv2.imread('Lena.jpg')
 
 image = cv2.cvtColor(image_original, cv2.COLOR_BGR2GRAY)
 
@@ -27,8 +27,7 @@ for y in range(image.shape[0]):
         else:
             new_image[y,x] = np.clip(alpha*image[y,x] + beta, 0, 255)
 
-print(new_image.shape)
-cv2.imshow('R-RGB', new_image)
-
-# Imprimindo a imagem
+# show image
+cv2.imshow('lena_escondida', new_image)
+cv2.imwrite('lena_escondida.jpg', new_image)
 cv2.waitKey(0)
